@@ -1,0 +1,30 @@
+[
+  {
+    "version": 2.6,
+    "what_is_new": "Performance improvements while generating suggestions and bug fixing",
+    "dependencies": [
+      "jackson-dataformat-xml>=2.10.3",
+      "jackson-annotations>=2.13.3",
+      "jackson-databind>=2.10.3",
+      "jackson-core>=2.13.3",
+      "jackson-module-jaxb-annotations>=2.10.3",
+      "jmeter-bzm-commons>=0.2.1",
+      "json>=20190722",
+      "maven-artifact>=3.8.4"
+    ]
+  },
+  {
+    "version": 2.5,
+    "what_is_new": "Performance improvements while generating suggestions and bug fixing",
+    "dependencies": [
+      "jackson-dataformat-xml>=2.10.3",
+      "jackson-annotations>=2.13.3",
+      "jackson-databind>=2.10.3",
+      "jackson-core>=2.13.3",
+      "jackson-module-jaxb-annotations>=2.10.3",
+      "jmeter-bzm-commons>=0.2.1",
+      "json>=20190722",
+      "maven-artifact>=3.8.4"
+    ]
+  }
+]
