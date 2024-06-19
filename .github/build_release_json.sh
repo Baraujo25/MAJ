@@ -1,9 +1,7 @@
 #!/bin/bash
 
 #--------------Environment variables------------------#
-#RELEASE_VERSION=2.5
 RELEASE_VERSION=$1
-#PLUGIN_ARTIFACT_NAME='jmeter-bzm-correlation-recorder'
 PLUGIN_ARTIFACT_NAME=$2
 PLUGIN_REPOSITORY_NAME=$3
 RELEASES_FILE="releases.json"
@@ -20,7 +18,8 @@ get_dependencies() {
 }
 
 get_artifacts_urls() {
-    bash .github/get_artifacts_urls.sh "v$RELEASE_VERSION" "$PLUGIN_REPOSITORY_NAME" > "$ARTIFACT_URLS_FILE"
+    gh release view -R Blazemeter/$PLUGIN_REPOSITORY_NAME \
+        "v$RELEASE_VERSION" --json assets -q '.assets.[].url' > "$ARTIFACT_URLS_FILE"
 }
 
 find_url_for_dependency() {
@@ -52,7 +51,9 @@ create_release_object() {
     local what_is_new="$2"
     local plugin_url="$3"
     local dependencies="$4"
-    jq -n --arg version "$version" --arg what_is_new "$what_is_new" --arg plugin_url "$plugin_url" --argjson libs "$dependencies" '{($version): {changes: $what_is_new, downloadUrl: $plugin_url, libs: $libs, "depends": ["bzm-repositories"]}}'
+    jq -n --arg version "$version" --arg what_is_new "$what_is_new" \
+        --arg plugin_url "$plugin_url" --argjson libs "$dependencies" \
+        '{($version): {changes: $what_is_new, downloadUrl: $plugin_url, libs: $libs, "depends": ["bzm-repositories"]}}'
 }
 
 

@@ -7,7 +7,6 @@
 
 # Constants -> modify abstracta & baraujo25
 FORKED_REPO_URL="https://github.com/Baraujo25/jmeter-plugins.git"
-UPSTREAM_REPO_URL="https://github.com/Abstracta/jmeter-plugins.git"
 FORKED_REPO_SSH="git@github.com:Baraujo25/jmeter-plugins.git"
 UPSTREAM_REPO_SSH="git@github.com:Abstracta/jmeter-plugins.git"
 REPO_DIR="jmeter-plugins"
@@ -33,7 +32,7 @@ init_git() {
 
 clone_and_init_repo() {
     cd ..
-    git clone $FORKED_REPO_URL
+    git clone $FORKED_REPO_SSH
     cd $REPO_DIR
 }
 
@@ -68,17 +67,6 @@ commit_and_push_changes() {
 create_pull_request() {
     echo "$GH_TOKEN" | gh auth login --with-token
     gh pr create --title "Automated PR from GitHub Actions" --body "This is an automated PR created by GitHub Actions." --head $FORKED_REPO_USER:$BRANCH_NAME --base master --repo $UPSTREAM_REPO_USER/$REPO_DIR
-
-    # curl -X POST -H "Authorization: token $GH_TOKEN" \
-    #   -H "Accept: application/vnd.github.v3+json" \
-    #   "https://api.github.com/repos/$UPSTREAM_REPO_USER/$REPO_DIR/pulls" \
-    #   -d '{
-    #     "title": "Automated PR from GitHub Actions",
-    #     "body": "This is an automated PR created by GitHub Actions.",
-    #     "head": '$FORKED_REPO_USER:$BRANCH_NAME',
-    #     "base": "master"
-    #   }'
-
 }
 
 
@@ -95,5 +83,5 @@ echo "Update file"
 update_json_file
 echo "Commit and push"
 commit_and_push_changes
-echo "create PR"
-create_pull_request
+#echo "create PR"
+#create_pull_request
